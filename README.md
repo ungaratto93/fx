@@ -101,7 +101,7 @@ Exemplo de resposta
 
 ## Documentacao
 
-* http://localhost:8080/swagger-ui/index.html#/fiat-exchange-controller/get
+* http://localhost:8080/swagger-ui/index.html
 
 ## Docker
 Comando para executar o projeto via imagem docker
