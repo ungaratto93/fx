@@ -8,6 +8,18 @@ A FX é uma API de câmbio **SEM FINS COMERCIAIS** que utiliza o serviço da Wis
 [![Cobertura de Testes](https://img.shields.io/codecov/c/github/seu-usuario/seu-repositorio)](https://codecov.io/gh/ungaratto93/fx)
 [![Status da Build](https://img.shields.io/github/workflow/status/seu-usuario/seu-repositorio/Nome-da-Workflow)](https://github.com/ungaratto93/fx/actions)
 
+## Negocio
+
+O câmbio é a taxa de conversão entre duas moedas, indicando quanto de uma moeda é necessário para adquirir uma unidade da outra moeda. Se a taxa de câmbio para trocar 1 USD por reais é R$4,99, você pode multiplicar a quantidade de dólares desejada pela taxa para obter o valor equivalente em reais.
+
+```bash
+Exemplo:
+Quantidade desejada em USD: 100 USD
+Taxa de câmbio: R$4,99 por USD
+Cálculo: 100 USD * R$4,99/USD = R$499,00 
+```
+Portanto, ao trocar 100 dólares americanos a uma taxa de câmbio de R$4,99 por dólar, você obteria R$499,00.
+
 
 ## Arquitetura
 
