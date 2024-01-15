@@ -1,5 +1,4 @@
-name: Java CI with Maven
-
+name: ci-maven
 on:
   pull_request:
     branches: [ "develop" ]
