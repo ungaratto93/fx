@@ -5,7 +5,7 @@
 A FX é uma API de câmbio **SEM FINS COMERCIAIS** que utiliza o serviço da Wise para fornecer taxas de câmbio atualizadas.
 
 [![Em Desenvolvimento](https://img.shields.io/badge/Em%20Desenvolvimento-Sim-brightgreen)](https://github.com/seu-usuario/seu-repositorio)
-[![Cobertura de Testes](https://img.shields.io/codecov/c/github/seu-usuario/seu-repositorio)](https://codecov.io/gh/ungaratto93/fx)
+[![Cobertura de Testes](https://img.shields.io/codecov/c/github/ungaratto93/fx)](https://codecov.io/gh/ungaratto93/fx)
 [![Status da Build](https://img.shields.io/github/workflow/status/seu-usuario/seu-repositorio/Nome-da-Workflow)](https://github.com/ungaratto93/fx/actions)
 
 ## Negocio
