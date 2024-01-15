@@ -125,9 +125,4 @@ docker pull ungaratto93/api-fx:latest
 Proximas melhorias a serem implementadas
 - [ ] Aplicar o padrao de projeto proxy na consulta da taxa
   - O motivo da aplicacao deste padrao e para evitar a sobrecarga nos servicos de terceiros.
-- [ ] Aumentar a cobertura de testes unitarios
-  - Algumas classes estao sem testes unitarios
-- [ ] Adicionar mock ao FeignClient da Wise 
-  - Para nao efetuar chamadas reais ao servico no modo de teste. 
-- [ ] Refatorar o conversao de dados entre objetos entrada/saida e dominio
-  - Existe uma complexidade demasiada no momento de converta os valores de entrada/saida para realizar a consulta da taxa
+
