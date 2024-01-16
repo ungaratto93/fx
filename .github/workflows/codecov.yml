@@ -1,4 +1,4 @@
-name: Java CI with Maven
+name: ci-codecov
 
 on:
   pull_request:
