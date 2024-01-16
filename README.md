@@ -5,8 +5,20 @@
 A FX é uma API de câmbio **SEM FINS COMERCIAIS** que utiliza o serviço da Wise para fornecer taxas de câmbio atualizadas.
 
 [![Em Desenvolvimento](https://img.shields.io/badge/Em%20Desenvolvimento-Sim-brightgreen)](https://github.com/seu-usuario/seu-repositorio)
-[![Cobertura de Testes](https://img.shields.io/codecov/c/github/seu-usuario/seu-repositorio)](https://codecov.io/gh/ungaratto93/fx)
-[![Status da Build](https://img.shields.io/github/workflow/status/seu-usuario/seu-repositorio/Nome-da-Workflow)](https://github.com/ungaratto93/fx/actions)
+[![Cobertura de Testes](https://img.shields.io/codecov/c/github/ungaratto93/fx)](https://codecov.io/gh/ungaratto93/fx)
+[![Status da Build](https://img.shields.io/github/workflow/status/ungaratto93/fx/ci-maven)](https://github.com/ungaratto93/fx/actions)
+
+## Negocio
+
+O câmbio é a taxa de conversão entre duas moedas, indicando quanto de uma moeda é necessário para adquirir uma unidade da outra moeda. Se a taxa de câmbio para trocar 1 USD por reais é R$4,99, você pode multiplicar a quantidade de dólares desejada pela taxa para obter o valor equivalente em reais.
+
+```bash
+Exemplo:
+Quantidade desejada em USD: 100 USD
+Taxa de câmbio: R$4,99 por USD
+Cálculo: 100 USD * R$4,99/USD = R$499,00 
+```
+Portanto, ao trocar 100 dólares americanos a uma taxa de câmbio de R$4,99 por dólar, você obteria R$499,00.
 
 
 ## Arquitetura
@@ -101,7 +113,7 @@ Exemplo de resposta
 
 ## Documentacao
 
-* http://localhost:8080/swagger-ui/index.html#/fiat-exchange-controller/get
+* http://localhost:8080/swagger-ui/index.html
 
 ## Docker
 Comando para executar o projeto via imagem docker
@@ -113,9 +125,4 @@ docker pull ungaratto93/api-fx:latest
 Proximas melhorias a serem implementadas
 - [ ] Aplicar o padrao de projeto proxy na consulta da taxa
   - O motivo da aplicacao deste padrao e para evitar a sobrecarga nos servicos de terceiros.
-- [ ] Aumentar a cobertura de testes unitarios
-  - Algumas classes estao sem testes unitarios
-- [ ] Adicionar mock ao FeignClient da Wise 
-  - Para nao efetuar chamadas reais ao servico no modo de teste. 
-- [ ] Refatorar o conversao de dados entre objetos entrada/saida e dominio
-  - Existe uma complexidade demasiada no momento de converta os valores de entrada/saida para realizar a consulta da taxa
+
