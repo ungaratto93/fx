@@ -17,7 +17,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Install dependencies
-      run: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+      run: mvn clean -U install
     - name: Run tests and collect coverage
       run: mvn jacoco:report
     - name: Upload coverage reports to Codecov
