@@ -29,17 +29,17 @@ jobs:
       
       - name: Set timestamp
         id: timestamp
-        run: echo "::set-output name=ts::$(date +%y.%m.%d%H%M)"
+        run: echo "::set-output name=ts::$(date +%y.%m.%d)"
           
       - name: Create Release Tag
         id: create_tag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "RELEASE_DATE=$(date +%y.%m.%d%H%M)" >> ${GITHUB_ENV}
+          echo "RELEASE_DATE=$(date +%y.%m.%d)" >> ${GITHUB_ENV}
           echo ${{github.env.GITHUB_ENV}}
-          git tag $(date +%y.%m.%d%H%M)
-          git push origin $(date +%y.%m.%d%H%M)
+          git tag $(date +%y.%m.%d)
+          git push origin $(date +%y.%m.%d)
       - name: Create GitHub release
         uses: actions/create-release@v1
         env:
