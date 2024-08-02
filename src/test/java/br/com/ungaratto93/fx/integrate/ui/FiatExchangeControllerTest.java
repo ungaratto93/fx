@@ -23,7 +23,7 @@ import br.com.ungaratto93.fx.ui.FiatExchangeController;
     @Test
     void shouldReturnFiatValueConvertedWhenRequestWithValidCurrenciesAndAmount() throws WiseRateServiceException {
 
-        final var fiatOutputDataResponseEntity = controller.get(
+        final var fiatOutputDataResponseEntity = controller.post(
                 new FiatInputData(Symbol.USD, Symbol.BRL, 2.00)
         );
 

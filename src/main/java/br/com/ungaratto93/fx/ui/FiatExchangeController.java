@@ -20,7 +20,7 @@ public class FiatExchangeController {
 
     @Description("Retorna o valor obtido apos o calculo de cambio")
     @PostMapping("/exchanges")
-    public ResponseEntity<FiatOutputData> get(@RequestBody FiatInputData fiatInputData) throws WiseRateServiceException {
+    public ResponseEntity<FiatOutputData> post(@RequestBody FiatInputData fiatInputData) throws WiseRateServiceException {
        var data = fiatExchangeUsecase.exec(fiatInputData);
        return ResponseEntity.ok(data);
     }
