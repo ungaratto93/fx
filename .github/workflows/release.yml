@@ -45,7 +45,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{ steps.timestamp.outputs.ts }}
           release_name: Release ${{ steps.timestamp.outputs.ts }}
           body: "Automatic release with timestamp :rocket: "
           draft: false
@@ -62,4 +61,4 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Push Docker Image
-        run: docker push $DOCKER_USERNAME/api-fx:latest .
+        run: docker push $DOCKER_USERNAME/api-fx:latest
