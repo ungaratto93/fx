@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build Docker Image
-        run: docker build -t $DOCKER_USERNAME/api-fx:latest
+        run: docker build -t $DOCKER_USERNAME/api-fx:latest .
       - name: Login to Docker Hub
         run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
       - name: Push Docker Image
