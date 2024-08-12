@@ -38,19 +38,18 @@ jobs:
         run: |
           echo "RELEASE_DATE=$(date +%y.%m.%d)" >> ${GITHUB_ENV}
           echo ${{github.env.GITHUB_ENV}}
-          git tag $(date +%y.%m.%d)
-          git push origin $(date +%y.%m.%d)
+
       - name: Create GitHub release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          tag_name: v${{ steps.timestamp.outputs.ts }}
           release_name: Release ${{ steps.timestamp.outputs.ts }}
           body: "Automatic release with timestamp :rocket: "
           draft: false
           prerelease: false
 
-      
       - name: Build Docker Image
         run: docker build -t ungaratto93/api-fx:latest .
       
