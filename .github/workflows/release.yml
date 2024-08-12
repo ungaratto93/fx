@@ -60,4 +60,4 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Push Docker Image
-        run: docker push $DOCKER_USERNAME/api-fx:latest
+        run: docker push ungaratto93/api-fx:latest
