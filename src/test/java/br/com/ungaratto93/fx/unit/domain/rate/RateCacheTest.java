@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Assertions;
 public class RateCacheTest {
 
     @Test
-    public void deveRetornarUmObjetoRateCache() {
+    public void deveRetornarUmObjRateBuscandoPelaKeyNoCache() {
 
         var rate = new Rate(
                 Symbol.BRL,
@@ -30,29 +30,29 @@ public class RateCacheTest {
 
         Assertions.assertEquals(
                 rate.getSource(),
-                rateCache.rateByKeyFromCache("BRL_USD").getSource()
+                rateCache.getByKeyFromCache("BRL_USD").getSource()
         );
         Assertions.assertEquals(
                 rate.getTarget(),
-                rateCache.rateByKeyFromCache("BRL_USD").getTarget()
+                rateCache.getByKeyFromCache("BRL_USD").getTarget()
         );
         Assertions.assertEquals(
                 rate.getValue(),
-                rateCache.rateByKeyFromCache("BRL_USD").getValue()
+                rateCache.getByKeyFromCache("BRL_USD").getValue()
         );
         Assertions.assertEquals(
                 rate.getTime(),
-                rateCache.rateByKeyFromCache("BRL_USD").getTime()
+                rateCache.getByKeyFromCache("BRL_USD").getTime()
         );
         Assertions.assertEquals(
                 rate.getClass(),
-                rateCache.rateByKeyFromCache("BRL_USD").getClass()
+                rateCache.getByKeyFromCache("BRL_USD").getClass()
         );
 
     }
 
     @Test
-    public void deveRetornaUmObjetoRatePelaKeyNoCache() {
+    public void deveRetornaUmObjRateBuscandoPelaKeyComDoisObjNoCache() {
         var rateBrl = new Rate(
                 Symbol.BRL,
                 Symbol.USD,
@@ -77,28 +77,81 @@ public class RateCacheTest {
                 rateUsd.getTime());
 
         String key = "USD_BRL";
-        Rate rate = rateCache.rateByKeyFromCache(key);
+        Rate rate = rateCache.getByKeyFromCache(key);
 
         Assertions.assertEquals(
                 rate.getSource(),
-                rateCache.rateByKeyFromCache(key).getSource()
+                rateCache.getByKeyFromCache(key).getSource()
         );
         Assertions.assertEquals(
                 rate.getTarget(),
-                rateCache.rateByKeyFromCache(key).getTarget()
+                rateCache.getByKeyFromCache(key).getTarget()
         );
         Assertions.assertEquals(
                 rate.getValue(),
-                rateCache.rateByKeyFromCache(key).getValue()
+                rateCache.getByKeyFromCache(key).getValue()
         );
         Assertions.assertEquals(
                 rate.getTime(),
-                rateCache.rateByKeyFromCache(key).getTime()
+                rateCache.getByKeyFromCache(key).getTime()
         );
         Assertions.assertEquals(
                 rate.getClass(),
-                rateCache.rateByKeyFromCache(key).getClass()
+                rateCache.getByKeyFromCache(key).getClass()
         );
     }
 
+    @Test
+    public void deveRemoverTodosObjetosNoCache() {
+        var rateBrl = new Rate(
+                Symbol.BRL,
+                Symbol.USD,
+                4.916,
+                "1701993600000");
+        var rateUsd = new Rate(
+                Symbol.USD,
+                Symbol.BRL,
+                0.501,
+                "1701993600000");
+
+        RateCache rateCache = new RateCache();
+        rateCache.putRateOnCache(
+                rateBrl.getSource(),
+                rateBrl.getTarget(),
+                rateBrl.getValue(),
+                rateBrl.getTime());
+        rateCache.putRateOnCache(
+                rateUsd.getSource(),
+                rateUsd.getTarget(),
+                rateUsd.getValue(),
+                rateUsd.getTime());
+
+        String keyUSD = "USD_BRL";
+        String keyBRL = "BRL_USD";
+        rateCache.removeByKeyFromCache(keyUSD);
+        rateCache.removeByKeyFromCache(keyBRL);
+
+        Assertions.assertTrue(rateCache.isEmpty());
+
+    }
+
+    @Test
+    public void deveRetornarQueRateEAntiga() {
+
+        var rateBrl = new Rate(
+                Symbol.BRL,
+                Symbol.USD,
+                4.916,
+                "1701993600000");
+
+        RateCache rateCache = new RateCache();
+        rateCache.putRateOnCache(
+                rateBrl.getSource(),
+                rateBrl.getTarget(),
+                rateBrl.getValue(),
+                rateBrl.getTime());
+
+        Assertions.assertTrue(rateCache.isRateOld("BRL_USD"));
+
+    }
 }
