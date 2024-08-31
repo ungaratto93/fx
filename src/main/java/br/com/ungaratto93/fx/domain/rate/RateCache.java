@@ -40,6 +40,7 @@ public class RateCache {
                        .time(time)
                        .build()
        );
+        LOGGER.info("CACHE - A {} foi inserida no cache com time de {}", keyName, time);
     }
 
     private String generateKeyName(Symbol source, Symbol target) {
@@ -60,12 +61,16 @@ public class RateCache {
 
     public boolean isRateOld(String keyname) {
 
-        long timeFromRateInCache = Long.parseLong(
+        long rateTime = Long.parseLong(
                 getByKeyFromCache(keyname).getTime());
-        long timeOfRateInCache = System.currentTimeMillis() - timeFromRateInCache;
+        long timeOfRateInCache = System.currentTimeMillis() - rateTime;
 
-        LOGGER.info("O tempo da {} no cache é {}", keyname, timeOfRateInCache);
+        LOGGER.info("CACHE - O tempo da {} no cache é {}", keyname, timeOfRateInCache);
 
         return timeOfRateInCache > limitTimeForRateInCache ? Boolean.TRUE : Boolean.FALSE;
+    }
+
+    public String getKeyName(Symbol source, Symbol target) {
+        return generateKeyName(source, target);
     }
 }

@@ -138,11 +138,13 @@ public class RateCacheTest {
     @Test
     public void deveRetornarQueRateEAntiga() {
 
+
+
         var rateBrl = new Rate(
                 Symbol.BRL,
                 Symbol.USD,
                 4.916,
-                "1701993600000");
+                String.valueOf(System.currentTimeMillis() - 100));
 
         RateCache rateCache = new RateCache();
         rateCache.putRateOnCache(

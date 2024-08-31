@@ -4,6 +4,7 @@ import br.com.ungaratto93.fx.domain.fiat.FiatExchangeService;
 import br.com.ungaratto93.fx.domain.fiat.FiatInputData;
 import br.com.ungaratto93.fx.domain.fiat.FiatOutputData;
 import br.com.ungaratto93.fx.infra.fiat.FiatExchangeServiceWiseRates;
+import br.com.ungaratto93.fx.infra.rate.ProxyRateService;
 import br.com.ungaratto93.fx.infra.rate.WiseRateService;
 import br.com.ungaratto93.fx.domain.rate.*;
 import org.slf4j.Logger;
@@ -20,16 +21,16 @@ public class FiatExcxhangeUseCase {
     private final FiatExchangeService fiatEchangeService;
 
     @Autowired
-    private final WiseRateService wiseRateService;
+    private final ProxyRateService rateService;
 
-    public FiatExcxhangeUseCase(WiseRateService wiseRateService, FiatExchangeService fiatExchangeService) {
-        this.wiseRateService = wiseRateService;
+    public FiatExcxhangeUseCase(ProxyRateService proxyRateService, FiatExchangeService fiatExchangeService) {
+        this.rateService = proxyRateService;
         this.fiatEchangeService = fiatExchangeService;
     }
 
     public FiatOutputData exec(FiatInputData fiatInputData) throws WiseRateServiceException {
         LOGGER.info("Obtendo a taxa para conversao de fiat");
-        RateOutPut rateOutPutFromWiseService = this.wiseRateService.getRates(
+        RateOutPut rateOutPutFromWiseService = this.rateService.getRates(
                 new RateInput(
                         fiatInputData.from(),
                         fiatInputData.to(),
