@@ -22,8 +22,6 @@ public class WiseRateService implements RateService {
     @Override
     public RateOutPut getRates(RateInput rateInput) throws WiseRateServiceException {
 
-        String keyName = rateCache.getKeyName(rateInput.source(), rateInput.target());
-
         List<Rate> rates = feignWiseClient.getRates(
                 rateInput.source().name(),
                 rateInput.target().name(),

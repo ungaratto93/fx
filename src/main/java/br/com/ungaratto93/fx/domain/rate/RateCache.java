@@ -73,4 +73,5 @@ public class RateCache {
     public String getKeyName(Symbol source, Symbol target) {
         return generateKeyName(source, target);
     }
+
 }

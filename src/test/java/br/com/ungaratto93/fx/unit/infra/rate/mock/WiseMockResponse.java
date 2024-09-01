@@ -30,4 +30,12 @@ public class WiseMockResponse {
 
         return rates;
     }
+
+    public static List<Rate> get200EmptyResponse() {
+
+        LOGGER.info("A lista de objetos de Rate devolvida pelo BUILDER foi: {}", rates);
+
+        return rates;
+    }
+
 }
