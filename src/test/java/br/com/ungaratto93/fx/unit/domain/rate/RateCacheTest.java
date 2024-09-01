@@ -3,11 +3,26 @@ package br.com.ungaratto93.fx.unit.domain.rate;
 import br.com.ungaratto93.fx.domain.fiat.Symbol;
 import br.com.ungaratto93.fx.domain.rate.Rate;
 import br.com.ungaratto93.fx.domain.rate.RateCache;
+import br.com.ungaratto93.fx.unit.infra.rate.mock.RateMock;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
 
 public class RateCacheTest {
+
+    private RateCache rateCache;
+
+    @Before
+    public void setUp() {
+        rateCache = new RateCache();
+    }
+
+    @After
+    public void tearDown () {
+        rateCache = null;
+    }
 
     @Test
     public void deveRetornarUmObjRateBuscandoPelaKeyNoCache() {
@@ -18,7 +33,6 @@ public class RateCacheTest {
                 4.916,
                 "1701993600000");
 
-        RateCache rateCache = new RateCache();
         rateCache.putRateOnCache(
                 rate.getSource(),
                 rate.getTarget(),
@@ -64,7 +78,6 @@ public class RateCacheTest {
                 0.501,
                 "1701993600000");
 
-        RateCache rateCache = new RateCache();
         rateCache.putRateOnCache(
                 rateBrl.getSource(),
                 rateBrl.getTarget(),
@@ -114,7 +127,6 @@ public class RateCacheTest {
                 0.501,
                 "1701993600000");
 
-        RateCache rateCache = new RateCache();
         rateCache.putRateOnCache(
                 rateBrl.getSource(),
                 rateBrl.getTarget(),
@@ -138,22 +150,92 @@ public class RateCacheTest {
     @Test
     public void deveRetornarQueRateEAntiga() {
 
-
+        rateCache.setLimitTimeForRateInCache(900);
 
         var rateBrl = new Rate(
                 Symbol.BRL,
                 Symbol.USD,
                 4.916,
-                String.valueOf(System.currentTimeMillis() - 100));
+                String.valueOf(System.currentTimeMillis() - 999));
 
-        RateCache rateCache = new RateCache();
         rateCache.putRateOnCache(
                 rateBrl.getSource(),
                 rateBrl.getTarget(),
                 rateBrl.getValue(),
                 rateBrl.getTime());
 
+        Assertions.assertEquals(900, rateCache.getLimitTimeForRateInCache());
         Assertions.assertTrue(rateCache.isRateOld("BRL_USD"));
+
+    }
+
+    @Test
+    public void deveRetornarQueRateNaoEAntiga() {
+
+        rateCache.setLimitTimeForRateInCache(900);
+
+        var rateBrl = new Rate(
+                Symbol.BRL,
+                Symbol.USD,
+                4.916,
+                String.valueOf(System.currentTimeMillis() - 899));
+
+        rateCache.putRateOnCache(
+                rateBrl.getSource(),
+                rateBrl.getTarget(),
+                rateBrl.getValue(),
+                rateBrl.getTime());
+
+        Assertions.assertFalse(rateCache.isRateOld("BRL_USD"));
+
+    }
+
+    @Test
+    public void deveInserirRateNoCache() {
+        Rate instance = RateMock.getInstance();
+        rateCache.putRateOnCache(
+                instance.getSource(),
+                instance.getTarget(),
+                instance.getValue(),
+                instance.getTime()
+        );
+
+        Assertions.assertFalse(rateCache.isEmpty());
+    }
+
+    @Test
+    public void deveRetornarChaveParaConsulta() {
+        String keyName = rateCache.getKeyName(Symbol.USD, Symbol.BRL);
+        Assertions.assertEquals("USD_BRL", keyName);
+    }
+
+    @Test
+    public void deveRemoverRateDoCache() {
+
+        Rate instance = RateMock.getInstance();
+        rateCache.putRateOnCache(
+                instance.getSource(),
+                instance.getTarget(),
+                instance.getValue(),
+                instance.getTime()
+        );
+        Assertions.assertFalse(rateCache.isEmpty());
+
+        rateCache.removeByKeyFromCache(
+                rateCache.getKeyName(Symbol.USD, Symbol.BRL)
+        );
+
+        Assertions.assertTrue(rateCache.isEmpty());
+
+    }
+
+
+    @Test
+    public void deveRetornarTempoLimiteNoCache() {
+        rateCache.setLimitTimeForRateInCache(900);
+        Assertions.assertEquals(
+                900, rateCache.getLimitTimeForRateInCache()
+        );
 
     }
 }
