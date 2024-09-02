@@ -51,9 +51,7 @@ jobs:
           release_name: Release ${{ steps.timestamp.outputs.ts }}
           body: |
             ## Changelog
-            ```
-            $(cat commit_messages.md)
-            ```
+            <<: commit_messages.md
           draft: false
           prerelease: false
 
