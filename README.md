@@ -4,9 +4,7 @@
 
 A FX é uma API de câmbio **SEM FINS COMERCIAIS** que utiliza o serviço da Wise para fornecer taxas de câmbio atualizadas.
 
-[![Em Desenvolvimento](https://img.shields.io/badge/Em%20Desenvolvimento-Sim-brightgreen)](https://github.com/seu-usuario/seu-repositorio)
 [![Cobertura de Testes](https://img.shields.io/codecov/c/github/ungaratto93/fx)](https://codecov.io/gh/ungaratto93/fx)
-[![ci-maven](https://github.com/ungaratto93/fx/actions/workflows/maven.yml/badge.svg?branch=develop)](https://github.com/ungaratto93/fx/actions/workflows/maven.yml)
 ## Negocio
 
 O câmbio é a taxa de conversão entre duas moedas, indicando quanto de uma moeda é necessário para adquirir uma unidade da outra moeda. Se a taxa de câmbio para trocar 1 USD por reais é R$4,99, você pode multiplicar a quantidade de dólares desejada pela taxa para obter o valor equivalente em reais.
