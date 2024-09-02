@@ -117,8 +117,3 @@ Comando para executar o projeto via imagem docker
 ```bash
 docker pull ungaratto93/api-fx:latest
 ```
-
-## Backlog
-Proximas melhorias a serem implementadas
-- [ ] Aplicar o padrao de projeto proxy na consulta da taxa
-  - O motivo da aplicacao deste padrao e para evitar a sobrecarga nos servicos de terceiros.
