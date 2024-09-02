@@ -26,14 +26,14 @@ public class WiseMockResponse {
         rates.add(rate1);
         rates.add(rate2);
 
-        LOGGER.info("A lista de objetos de Rate devolvida pelo BUILDER foi: {}", rates);
+        LOGGER.debug("A lista de objetos de Rate devolvida pelo BUILDER foi: {}", rates);
 
         return rates;
     }
 
     public static List<Rate> get200EmptyResponse() {
 
-        LOGGER.info("A lista de objetos de Rate devolvida pelo BUILDER foi: {}", rates);
+        LOGGER.debug("A lista de objetos de Rate devolvida pelo BUILDER foi: {}", rates);
 
         return rates;
     }

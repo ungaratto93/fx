@@ -51,8 +51,13 @@ public class RateCache {
         return rates.get(keyName);
     }
 
-    public void removeByKeyFromCache(String keyName) {
-        rates.remove(keyName);
+    public void removeByKeyFromCache(String keyName) throws UnsupportedOperationException {
+        LOGGER.debug("CACHE - O tamanho do cache é {}", rates.size());
+        if(!rates.isEmpty()) {
+            rates.remove(keyName);
+            LOGGER.info("CACHE - A {} foi removida do cache", keyName);
+        } else
+            throw new UnsupportedOperationException(String.format(" CACHE - A {} nao foi encontrada no cache", keyName));
     }
 
     public boolean isEmpty() {

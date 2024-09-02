@@ -231,6 +231,32 @@ public class RateCacheTest {
 
 
     @Test
+    public void deveLancarExcQuandoRemoveRateDoCacheVazio() {
+
+        Rate instance = RateMock.getInstance();
+        rateCache.putRateOnCache(
+                instance.getSource(),
+                instance.getTarget(),
+                instance.getValue(),
+                instance.getTime()
+        );
+        Assertions.assertFalse(rateCache.isEmpty());
+
+        rateCache.removeByKeyFromCache(
+                rateCache.getKeyName(Symbol.USD, Symbol.BRL)
+        );
+
+        try {
+            rateCache.removeByKeyFromCache(
+                    rateCache.getKeyName(Symbol.USD, Symbol.BRL)
+            );
+        } catch (UnsupportedOperationException ex) {
+            Assertions.assertEquals(UnsupportedOperationException.class, ex.getClass());
+        }
+
+    }
+
+    @Test
     public void deveRetornarTempoLimiteNoCache() {
         rateCache.setLimitTimeForRateInCache(900);
         Assertions.assertEquals(
