@@ -25,13 +25,16 @@ import static org.mockito.ArgumentMatchers.any;
 class RateExchangeServiceTest {
 
     @Mock
-    WiseRateService wiseRateService;
-
-    @InjectMocks
-    ProxyRateService proxyRateService;
+    private WiseRateService wiseRateService;
 
     @Mock
-    FeignWiseClient client;
+    private RateCache rateCache;
+
+    @InjectMocks
+    private ProxyRateService proxyRateService;
+
+    @Mock
+    private FeignWiseClient client;
 
     @Test
     void shouldReturnCurrentRatesFromWiseWhenGetWithValidPath() throws WiseRateServiceException {
@@ -120,5 +123,7 @@ class RateExchangeServiceTest {
         Assertions.assertEquals("1702749167489", rates.time());
 
     }
+
+
 
 }

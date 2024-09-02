@@ -22,28 +22,29 @@ public class ProxyRateService implements RateService {
 
     @Override
     public RateOutPut getRates(RateInput rateInput) throws WiseRateServiceException {
-
         String keyName = rateCache.getKeyName(rateInput.source(), rateInput.target());
-        if(!rateCache.isEmpty() && !rateCache.isRateOld(keyName)) {
+        LOGGER.info("CACHE - Chave gerada {}", keyName);
+        try {
             LOGGER.info("CACHE - Recuperando taxas do cache local");
             Rate rate = rateCache.getByKeyFromCache(keyName);
             LOGGER.info("CACHE - Taxa encontrada no cache local, retornando-a");
+            if(rateCache.isRateOld(rate))
+                throw new UnsupportedOperationException("Rate com prazo excedida");
+
             return new RateOutPut(rate.getSource(), rate.getTarget(), rate.getValue(), rate.getTime());
+        } catch ( UnsupportedOperationException ex) {
+            LOGGER.info("CACHE - Nao encontramos as taxas no cache local");
+            LOGGER.info("CACHE - Vamos consultar o servico externo");
+            RateOutPut out = wiseRateService.getRates(rateInput);
+
+            LOGGER.info("CACHE - Atualizando-o com a taxa {}", keyName);
+            rateCache.putRateOnCache(
+                    out.source(),
+                    out.target(),
+                    out.value(),
+                    out.time()
+            );
+            return out;
         }
-
-        LOGGER.info("CACHE - Nao encontramos as taxas no cache local");
-        LOGGER.info("CACHE - Vamos consultar o servico externo");
-
-        RateOutPut out = wiseRateService.getRates(rateInput);
-
-        LOGGER.info("CACHE - Atualizando-o com a taxa {}", keyName);
-        rateCache.putRateOnCache(
-                out.source(),
-                out.target(),
-                out.value(),
-                out.time()
-        );
-
-        return out;
     }
 }

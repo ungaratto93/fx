@@ -165,7 +165,7 @@ public class RateCacheTest {
                 rateBrl.getTime());
 
         Assertions.assertEquals(900, rateCache.getLimitTimeForRateInCache());
-        Assertions.assertTrue(rateCache.isRateOld("BRL_USD"));
+        Assertions.assertTrue(rateCache.isRateOld(rateBrl));
 
     }
 
@@ -186,7 +186,7 @@ public class RateCacheTest {
                 rateBrl.getValue(),
                 rateBrl.getTime());
 
-        Assertions.assertFalse(rateCache.isRateOld("BRL_USD"));
+        Assertions.assertFalse(rateCache.isRateOld(rateBrl));
 
     }
 
@@ -231,7 +231,7 @@ public class RateCacheTest {
 
 
     @Test
-    public void deveLancarExcQuandoRemoveRateDoCacheVazio() {
+    public void deveLancarExcQuandoRemoveRateDoCacheJaRemovido() {
 
         Rate instance = RateMock.getInstance();
         rateCache.putRateOnCache(
@@ -262,10 +262,19 @@ public class RateCacheTest {
         Assertions.assertEquals(
                 900, rateCache.getLimitTimeForRateInCache()
         );
-
     }
 
+    @Test
+    public void deveLancarExcQuandoRemoveRateDoCacheVazio() {
+        try {
+            rateCache.removeByKeyFromCache(
+                    rateCache.getKeyName(Symbol.USD, Symbol.BRL)
+            );
+        } catch (UnsupportedOperationException ex) {
+            Assertions.assertEquals(UnsupportedOperationException.class, ex.getClass());
+        }
 
+    }
 
 
 

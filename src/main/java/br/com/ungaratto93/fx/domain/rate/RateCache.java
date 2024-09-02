@@ -47,8 +47,13 @@ public class RateCache {
         return source.name().concat("_").concat(target.name());
     }
 
-    public Rate getByKeyFromCache(String keyName) {
-        return rates.get(keyName);
+    public Rate getByKeyFromCache(String keyName) throws UnsupportedOperationException {
+        if(!rates.isEmpty()) {
+            LOGGER.info("CACHE - Recuperando taxas do cache local");
+            return rates.get(keyName);
+        } else
+            throw new UnsupportedOperationException(String.format(" CACHE - A {} nao foi encontrada no cache", keyName));
+
     }
 
     public void removeByKeyFromCache(String keyName) throws UnsupportedOperationException {
@@ -64,13 +69,11 @@ public class RateCache {
         return rates.isEmpty();
     }
 
-    public boolean isRateOld(String keyname) {
-
-        long rateTime = Long.parseLong(
-                getByKeyFromCache(keyname).getTime());
+    public boolean isRateOld(Rate rate) {
+        long rateTime = Long.parseLong(rate.getTime());
         long timeOfRateInCache = System.currentTimeMillis() - rateTime;
 
-        LOGGER.info("CACHE - O tempo da {} no cache é {}", keyname, timeOfRateInCache);
+        LOGGER.info("CACHE - O tempo desta rate no cache é {}", timeOfRateInCache);
 
         return timeOfRateInCache > limitTimeForRateInCache ? Boolean.TRUE : Boolean.FALSE;
     }
