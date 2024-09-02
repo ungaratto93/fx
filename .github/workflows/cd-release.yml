@@ -30,7 +30,10 @@ jobs:
       - name: Set timestamp
         id: timestamp
         run: echo "::set-output name=ts::$(date +%y.%m.%d)"
-          
+
+      - name: Capture commit messages
+        run: git log --pretty=oneline > commit_messages.md
+
       - name: Create Release Tag
         id: create_tag
         env:
@@ -45,8 +48,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: v${{ steps.timestamp.outputs.ts }}
-          release_name: Release ${{ steps.timestamp.outputs.ts }}
-          body: "Automatic release with timestamp :rocket: "
+          release_name: Release ${{ steps.timestamp.outputs.ts 
+          body: |
+            ## Changelog
+            ```
+            $(cat commit_messages.md)
+            ```
           draft: false
           prerelease: false
 
