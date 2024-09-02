@@ -32,7 +32,9 @@ jobs:
         run: echo "::set-output name=ts::$(date +%y.%m.%d)"
 
       - name: Capture commit messages
-        run: git log --pretty=oneline > commit_messages.md
+        run: |
+          COMMIT_MESSAGES=$(git log --pretty=oneline)
+          echo "COMMIT_MESSAGES=${COMMIT_MESSAGES}" >> $GITHUB_ENV
 
       - name: Create Release Tag
         id: create_tag
@@ -51,7 +53,7 @@ jobs:
           release_name: Release ${{ steps.timestamp.outputs.ts }}
           body: |
             ## Changelog
-            <<: commit_messages.md
+            ${{ env.COMMIT_MESSAGES }}
           draft: false
           prerelease: false
 
