@@ -32,5 +32,17 @@ import br.com.ungaratto93.fx.ui.FiatExchangeController;
 
     }
 
+    @Test
+    void shouldReturnFiatConvertedWhenReqValidBodyAndRateFromCache() throws WiseRateServiceException {
+
+        final var fiatOutputDataResponseEntity = controller.post(
+                new FiatInputData(Symbol.USD, Symbol.BRL, 2.00)
+        );
+
+        Assertions.assertNotNull(fiatOutputDataResponseEntity);
+        Assertions.assertEquals(200, fiatOutputDataResponseEntity.getStatusCode().value());
+
+    }
+
 
 }
