@@ -8,8 +8,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.junit4.SpringRunner;
 
 
+@RunWith(SpringRunner.class)
 public class RateCacheTest {
 
     private RateCache rateCache;
