@@ -1,11 +1,6 @@
 package br.com.ungaratto93.fx.infra.rate;
 
-import br.com.ungaratto93.fx.domain.rate.Rate;
-import br.com.ungaratto93.fx.domain.rate.RateInput;
-import br.com.ungaratto93.fx.domain.rate.RateOutPut;
-import br.com.ungaratto93.fx.domain.rate.RateService;
-import br.com.ungaratto93.fx.domain.rate.FeignWiseClient;
-import br.com.ungaratto93.fx.domain.rate.WiseRateServiceException;
+import br.com.ungaratto93.fx.domain.rate.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +28,7 @@ public class WiseRateService implements RateService {
                 "day");
         LOGGER.info("WISE - As taxas retornadas foram: {}", rates);
 
-        if(rates.isEmpty()) {
+        if (rates.isEmpty()) {
             LOGGER.warn("WISE - Nao foi possivel retornar a taxa");
             throw new WiseRateServiceException(String.format("Ocorreu retorno de objeto invalido na consulta da taxa %s, na WISE", rateInput));
         }
@@ -46,6 +41,7 @@ public class WiseRateService implements RateService {
                 rate.getValue(),
                 rate.getTime()
         );
+
         LOGGER.info("WISE - Retornando a seguinte taxa: {}", out);
         return out;
     }
