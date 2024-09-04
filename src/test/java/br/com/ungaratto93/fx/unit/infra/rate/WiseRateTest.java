@@ -6,12 +6,10 @@ import br.com.ungaratto93.fx.infra.rate.WiseRateService;
 import br.com.ungaratto93.fx.unit.infra.rate.mock.WiseMockResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 

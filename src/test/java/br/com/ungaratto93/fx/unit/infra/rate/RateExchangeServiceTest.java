@@ -1,18 +1,17 @@
 package br.com.ungaratto93.fx.unit.infra.rate;
 
-import br.com.ungaratto93.fx.infra.rate.ProxyRateService;
-import br.com.ungaratto93.fx.unit.infra.rate.mock.RateMock;
-import br.com.ungaratto93.fx.unit.infra.rate.mock.WiseMockResponse;
 import br.com.ungaratto93.fx.domain.fiat.Symbol;
 import br.com.ungaratto93.fx.domain.rate.*;
+import br.com.ungaratto93.fx.infra.rate.ProxyRateService;
 import br.com.ungaratto93.fx.infra.rate.WiseRateService;
+import br.com.ungaratto93.fx.unit.infra.rate.mock.RateMock;
+import br.com.ungaratto93.fx.unit.infra.rate.mock.WiseMockResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 

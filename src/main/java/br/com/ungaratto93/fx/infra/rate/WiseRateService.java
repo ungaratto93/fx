@@ -17,8 +17,6 @@ public class WiseRateService implements RateService {
     @Autowired
     private FeignWiseClient feignWiseClient;
 
-    private RateCache rateCache = new RateCache();
-
     @Override
     public RateOutPut getRates(RateInput rateInput) throws WiseRateServiceException {
 
